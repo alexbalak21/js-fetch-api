@@ -1,2 +1,4 @@
 # js-fetch-api
-JavaScript - Fetch, Await
+
+Simple usage of javascript fetch method with asyc awit.
+Using GET and POST methods
