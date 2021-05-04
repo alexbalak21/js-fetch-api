@@ -7,14 +7,14 @@ photosUrl = 'https://jsonplaceholder.typicode.com/photos'
 function linkTest() {
   document.getElementById('output').innerHTML = 'LINK WORKS'
 }
-// FETCH FROM FILE
+// FETCH  FILE
 async function getText() {
   let res = await fetch('text.txt')
   let data = await res.text()
   document.getElementById('output').innerHTML = data
 }
 
-// FETCH FORM API
+// FETCH  API
 async function getUsers() {
   let res = await fetch(usersUrl)
   let data = await res.json()
@@ -39,7 +39,7 @@ async function getUsers() {
   document.getElementById('output').innerHTML = output
 }
 
-// FETCH FROM API ANOHER EXEMPLE
+// FETCH API ANOHER EXEMPLE
 async function getPosts() {
   let res = await fetch(postUrl)
   let data = await res.json()
@@ -55,55 +55,7 @@ async function getPosts() {
   document.getElementById('output').innerHTML = output
 }
 
-//DISPLAY FORM FOR POST
-function dispFormOld() {
-  let form = `
-  <form id="addPost">
-        <input type="text" id="title" />
-        <br /><br />
-        <textarea id="body" cols="30" rows="10"></textarea>
-        <br />
-        <input type="submit" name="Submit" />
-  </form>
-      `
-  document.getElementById('output').innerHTML = form
-  document.getElementById('addPost').addEventListener('submit', addPost)
-  // ADD POST WHEN FORM IS SUBMITED
-  function addPostOld(event) {
-    event.preventDefault()
-    let title = document.getElementById('title').value
-    let body = document.getElementById('body').value
-    fetch('https://jsonplaceholder.typicode.com/posts', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ title: title, body: body }),
-    })
-      .then((res) => res.json())
-      .then((data) => console.log(data))
-  }
-}
-
-async function dispImg() {
-  let result = await fetch(photosUrl)
-  let list = await result.json()
-  let data = list.slice(0, 60)
-  output = ''
-  data.forEach((post) => {
-    let title = post.title
-    let thumb = post.thumbnailUrl
-    let imgUrl = post.url
-    output += ` <a href="${imgUrl}">
-    <img src="${thumb}" alt="${title}">
-    </a>
-    `
-  })
-  document.getElementById('output').innerHTML = output
-}
-
-//DISPLAY FORM FOR POST
+//DISPLAY FORM
 function dispForm() {
   let form = `
   <form id="addPost">
@@ -141,4 +93,22 @@ async function addPost(event) {
   console.log(data)
   document.getElementById('output').innerHTML += output
   document.getElementById('addPost').addEventListener('submit', addPost)
+}
+
+// FETCH IMAGES FROM API
+async function dispImg() {
+  let result = await fetch(photosUrl)
+  let list = await result.json()
+  let data = list.slice(0, 60)
+  output = ''
+  data.forEach((post) => {
+    let title = post.title
+    let thumb = post.thumbnailUrl
+    let imgUrl = post.url
+    output += ` <a href="${imgUrl}">
+    <img src="${thumb}" alt="${title}">
+    </a>
+    `
+  })
+  document.getElementById('output').innerHTML = output
 }

@@ -48,3 +48,34 @@ function getPostsOld() {
       document.getElementById('output').innerHTML = output
     })
 }
+
+//DISPLAY FORM FOR POST
+function dispFormOld() {
+  let form = `
+  <form id="addPost">
+        <input type="text" id="title" />
+        <br /><br />
+        <textarea id="body" cols="30" rows="10"></textarea>
+        <br />
+        <input type="submit" name="Submit" />
+  </form>
+      `
+  document.getElementById('output').innerHTML = form
+  document.getElementById('addPost').addEventListener('submit', addPost)
+  // ADD POST WHEN FORM IS SUBMITED
+  function addPostOld(event) {
+    event.preventDefault()
+    let title = document.getElementById('title').value
+    let body = document.getElementById('body').value
+    fetch('https://jsonplaceholder.typicode.com/posts', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ title: title, body: body }),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data))
+  }
+}
